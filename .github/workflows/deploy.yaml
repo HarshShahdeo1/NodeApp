@@ -3,7 +3,7 @@ name: CI/CD — Lint, Test, Build & Deploy to ECS
 on:
    push:
      branches: [main]
-  pull_request:
+   pull_request:
     branches: [main]       # lint + test on PRs, but no deploy
 
 env:
@@ -109,7 +109,7 @@ jobs:
             > task-definition.json
 
       - name: Update task definition with new image
-      
+
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
