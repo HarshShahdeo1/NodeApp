@@ -1,17 +1,17 @@
 name: CI/CD — Lint, Test, Build & Deploy to ECS
 
 on:
-  # push:
-  #   branches: [main]
+   push:
+     branches: [main]
   pull_request:
     branches: [main]       # lint + test on PRs, but no deploy
 
 env:
   AWS_REGION: us-east-1                         # change to your region
-  ECR_REPOSITORY: xebia/my-node-app            # change to your ECR repo name
-  ECS_CLUSTER: victorious-flamingo-cub5ae           # change to your ECS cluster name
-  ECS_SERVICE: my-node-app-demo-d067           # change to your ECS service name
-  ECS_TASK_DEFINITION: victorious-flamingo-cub5ae-my-node-app-demo-d067
+  ECR_REPOSITORY: xebia/my-node-app           # change to your ECR repo name
+  ECS_CLUSTER: default           # change to your ECS cluster name
+  ECS_SERVICE: my-node-app-9458                                # change to your ECS service name
+  ECS_TASK_DEFINITION: default-my-node-app-9458
   CONTAINER_NAME: Main          # must match name in your task definition
 
 jobs:
@@ -109,6 +109,7 @@ jobs:
             > task-definition.json
 
       - name: Update task definition with new image
+      
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
